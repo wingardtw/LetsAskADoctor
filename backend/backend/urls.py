@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from rest_framework import routers, serializers, viewsets
 from api.models import Question, Answer, Tag
 from api import views
@@ -23,16 +23,26 @@ from api import views
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ('url', 'username', 'password', 'email', 'is_staff')
+        fields = ('url', 'username', 'password', 'email', 'is_staff', 'groups')
+
+class GroupSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Group
+        fields = ('url', 'name')
 
 # ViewSets define the view behavior.
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+class GroupViewSet(viewsets.ModelViewSet):
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
+router.register(r'groups', GroupViewSet)
 router.register(r'questions', views.QuestionViewSet)
 router.register(r'answers', views.AnswerViewSet)
 router.register(r'tags', views.TagViewSet)

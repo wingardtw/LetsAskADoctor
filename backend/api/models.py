@@ -12,6 +12,9 @@ TAG_CATEGORIES = (
 def get_sentinel_user():
     return get_user_model().objects.get_or_create(username='deleted')[0]
 
+class Profile(models.Model):
+    user = models.OneToOneField('auth.User', on_delete=models.CASCADE)
+
 class Question(models.Model):
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     text = models.TextField()
