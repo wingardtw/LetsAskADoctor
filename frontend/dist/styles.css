@@ -1,15 +1,54 @@
-.questionBy {
-  font-family: 'merriweather', serif;
-  font-size: 30px;
+.answerBoxHeader {
+
+}
+
+.answerButton {
+  grid-row: 2/3;
+  grid-column: 3/5;
+}
+
+.answerProfessionalInfoContainer {
+
+}
+
+.answerRating {
+
+}
+
+.answerText {
+
+}
+
+.answerTextAndButtonContainer {
+
 }
 
 .askedBy {
   color: 'grey';
   font-size: 14px;
+  grid-row: 2/3;
+  grid-column: 2/3;
 }
 
-.questionsContainer {
+#keywordFilter {
 
+}
+
+.professionalImage {
+
+}
+
+.professionalName {
+
+}
+
+.professionalVoteImage {
+
+}
+
+.questionBy {
+  font-family: 'merriweather', serif;
+  font-size: 30px;
 }
 
 .questionContainer {
@@ -35,12 +74,19 @@
   grid-column: 4/5;
 }
 
-.askedBy {
-  grid-row: 2/3;
-  grid-column: 2/3;
+.questionBoxHeader {
+
 }
 
-.answerButton {
-  grid-row: 2/3;
-  grid-column: 3/5;
+#tagSearch {
+
 }
+
+.userFilter {
+
+}
+
+
+
+
+

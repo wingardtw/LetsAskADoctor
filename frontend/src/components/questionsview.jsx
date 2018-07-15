@@ -103,7 +103,7 @@ class QuestionsView extends React.Component {
               <input type="submit" onClick={this.handleTagSearchClick}/>
             </form>
             <form>
-              Filter by keyword: <input type="text" id="filter" onChange={this.filterByKeyword} />
+              Filter by keyword: <input type="text" id="keywordFilter" onChange={this.filterByKeyword} />
             </form>
           <div className = "questionsContainer">
             <PatientQuestions questions={this.state.displayQuestions} changeDisplayAnswers={this.props.changeDisplayAnswers}/> 

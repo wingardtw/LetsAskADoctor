@@ -30,14 +30,14 @@ class Answer extends React.Component {
     return (
       <div>
         <span className = "answerContainer">
-          <div className = "professionalInfo">
+          <div className = "answerProfessionalInfoContainer">
             <div className = "professionalImage">🏥</div>
             <div className = "professionalName">{this.props.answer.user}</div>
           </div>        
         </span>
-        <span className = "textAndButtonContainer">
+        <span className = "answerTextAndButtonContainer">
           <span className = "answerRating">{this.props.answer.rating}</span>
-          <span className = "reviewText">{this.props.answer.text}</span>
+          <span className = "answerText">{this.props.answer.text}</span>
           <UpvoteButton upvoteButtonClicked={this.state.upvoteButtonClicked} handleUpvoteButtonClick={this.handleUpvoteButtonClick} professional={this.props.professional}/>
         </span>   
       </div>  
