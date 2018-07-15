@@ -2,7 +2,6 @@ import React from 'react'
 import reactDOM from 'react-dom'
 import Login from './login.jsx'
 import QuestionsView from './questionsview.jsx'
-import ProfessionalView from './professionalview.jsx'
 import Answers from './answers.jsx'
 
 class App extends React.Component {
@@ -74,13 +73,11 @@ class App extends React.Component {
   }
 
   adjustAnswerVote(answerId, change) {
-
     //change is 1 or -1, update the answer score in the database accordingly.
     console.log(answerId, change)
   }
 
   adjustQuestionVote(questionId, change) {
-
     //change is 1 or -1, update the question score in the database accordingly.
     console.log(questionId, change)
   }
@@ -90,9 +87,12 @@ class App extends React.Component {
     //questions are mapped, you'll be able to extract the id of the question.
     //make a query to the server to get all answers with that question ID.
     //we will then display all answers to that question if any(if there are none, let the user know)
+    //we also need to set the activeQuestion to the question corresponding to questionid
+
     this.setState({
       displayPage: 'answers'
     })
+
   }
 
   submitAnswer(text) {
@@ -122,7 +122,6 @@ class App extends React.Component {
         username: username
       })
     }
-
   }
 
   render() {

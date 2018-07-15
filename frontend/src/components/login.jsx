@@ -43,6 +43,7 @@ class Login extends React.Component {
           Password: <input type="password" name="password" onChange={this.handlePasswordInputChange}/><br />
           <input type="submit" value="Log in" onClick={this.handleSubmitCredentialsClick}/>
         </form>
+        <button>Create a new account</button>
       </div>)
   }
 }
