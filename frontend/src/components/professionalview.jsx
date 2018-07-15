@@ -6,7 +6,7 @@ class ProfessionalView extends React.Component {
   }
 
   render() {
-    if (this.props.userType !== 'professional') {
+    if (this.props.displayPage !== 'professional') {
       return <div></div>
     } else {
       return (

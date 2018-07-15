@@ -71,8 +71,21 @@ class PatientView extends React.Component {
   }
 
   render() {
-    if (this.props.userType !== 'patient') {
+    if (this.props.displayPage !== 'patient') {
       return <div></div>
+    } else if (this.props.professional) {
+      return (
+        <div className='patientViewContainer'>
+            <form>
+              Search a tag: <input type="text" id="tagSearch" onChange={this.changeTagSearchInput} />
+              <input type="submit" onClick={this.handleTagSearchClick}/>
+            </form>
+            <form>
+              Filter by keyword: <input type="text" id="filter" onChange={this.filterByKeyword} />
+            </form>
+          <PatientQuestions questions={this.state.displayQuestions} changeDisplayAnswers={this.props.changeDisplayAnswers}/>          
+        </div>
+      )
     } else {
       return (
         <div className='patientViewContainer'>
@@ -92,8 +105,7 @@ class PatientView extends React.Component {
             <form>
               Filter by keyword: <input type="text" id="filter" onChange={this.filterByKeyword} />
             </form>
-          <PatientQuestions questions={this.state.displayQuestions}/>
-          
+          <PatientQuestions questions={this.state.displayQuestions} changeDisplayAnswers={this.props.changeDisplayAnswers}/>          
         </div>)
     }    
   }

@@ -32,7 +32,7 @@ class Login extends React.Component {
   }
 
   render() {
-    if (this.props.userType) {
+    if (this.props.displayPage !== 'login') {
       return (<div></div>)
     }
     return (

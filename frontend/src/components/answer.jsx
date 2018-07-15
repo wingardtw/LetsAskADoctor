@@ -1,0 +1,45 @@
+import React from 'react'
+import UpvoteButton from './upvotebutton.jsx'
+
+class Answer extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      upvoteButtonClicked: false
+    }
+    this.handleUpvoteButtonClick = this.handleUpvoteButtonClick.bind(this)
+  }
+
+  handleUpvoteButtonClick() {
+    if (this.state.upvoteButtonClicked) {
+      this.props.answer.rating = this.props.answer.rating - 1
+    }
+    else {
+      this.props.answer.rating = this.props.answer.rating + 1
+    }
+    this.setState({
+      upvoteButtonClicked: !this.state.upvoteButtonClicked
+    })
+  }
+
+  render() {
+    return (
+      <div>
+        <span className = "answerContainer">
+          <div className = "professionalInfo">
+            <div className = "professionalImage">🏥</div>
+            <div className = "professionalName">{this.props.answer.user}</div>
+          </div>        
+        </span>
+        <span className = "textAndButtonContainer">
+          <span className = "answerRating">{this.props.answer.rating}</span>
+          <span className = "reviewText">{this.props.answer.text}</span>
+          <UpvoteButton upvoteButtonClicked={this.state.upvoteButtonClicked} handleUpvoteButtonClick={this.handleUpvoteButtonClick} professional={this.props.professional}/>
+        </span>   
+      </div>  
+    )
+  }
+}
+
+export default Answer

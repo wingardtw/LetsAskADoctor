@@ -1,22 +1,10 @@
 import React from 'react'
+import Question from './question.jsx'
 
-const PatientQuestions = ({ questions }) => {
+const PatientQuestions = ({ questions , changeDisplayAnswers }) => {
   return questions.map((question) => {
-    return <div className = 'question'>{question.text}</div>
+    return <Question question={question} changeDisplayAnswers={changeDisplayAnswers} />
   })
 }
-
-// class PatientQuestions extends React.Component {
-//   constructor(props) {
-//     super(props)
-
-//   }
-
-//   render() {
-
-
-//   }
-// }
-
 
 export default PatientQuestions
