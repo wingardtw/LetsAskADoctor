@@ -1,9 +1,11 @@
+from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import render
 from django.contrib.auth.models import User, Group, Permission
 from rest_framework import viewsets, permissions, status
 from rest_framework.response import Response
 from api.serializers import (
     QuestionSerializer,
+    QuestionListSerializer,
     AnswerSerializer,
     AnswerListSerializer,
     TagSerializer,
@@ -21,8 +23,25 @@ class CanCreateAnswer(permissions.BasePermission):
 
 # Create your views here.
 class QuestionViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
+    
+    def list(self, request):
+        queryset = Question.objects.all()
+        serializer = QuestionListSerializer(queryset, context={'request': request}, many=True)
+        return Response(serializer.data)
+
+    def create(self, request, *args, **kwargs):
+        data = request.data
+        serializer = self.get_serializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+    def perform_create(self, serializer):
+        serializer.save(asker=self.request.user)
 
 
 class AnswerViewSet(viewsets.ModelViewSet):
