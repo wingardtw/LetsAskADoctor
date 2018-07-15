@@ -1,7 +1,7 @@
 import React from 'react';
 import PatientQuestions from './patientquestions.jsx';
 
-class PatientView extends React.Component {
+class QuestionsView extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -111,4 +111,4 @@ class PatientView extends React.Component {
   }
 }
 
-export default PatientView
+export default QuestionsView

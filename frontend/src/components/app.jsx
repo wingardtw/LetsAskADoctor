@@ -31,6 +31,12 @@ class App extends React.Component {
         tags: ['medicine', 'delete'],
         user: 'Trololo123',
         id: 3
+      }, {
+        text: 'What is the typical dosage for medicine B?',
+        rating: 43,
+        tags: ['medicine', 'doses'],
+        user: 'May',
+        id: 4
       }].sort((question1, question2) => {
         return question2.rating > question1.rating
       }),
@@ -50,7 +56,7 @@ class App extends React.Component {
         user: 'Dr. Mario',
         id: 3
       }].sort((answer1, answer2) => {
-        return answer1.rating > answer2.rating
+        return answer2.rating > answer1.rating
       })
     }
     this.changeDisplayAnswers = this.changeDisplayAnswers.bind(this)
@@ -67,10 +73,16 @@ class App extends React.Component {
     })
   }
 
-  adjustAnswerVote(answerId) {
-    console.log(answerId)
+  adjustAnswerVote(answerId, change) {
 
-    //update the answer score in the database
+    //change is 1 or -1, update the answer score in the database accordingly.
+    console.log(answerId, change)
+  }
+
+  adjustQuestionVote(questionId, change) {
+
+    //change is 1 or -1, update the question score in the database accordingly.
+    console.log(questionId, change)
   }
 
   changeDisplayAnswers(questionId) {
@@ -84,6 +96,7 @@ class App extends React.Component {
   }
 
   submitAnswer(text) {
+    //submit an answer to the database, get username from this.state.username, 
     console.log("We are going to submit this answer ", text, "from ", this.state.username)
   }
 
@@ -96,11 +109,20 @@ class App extends React.Component {
     //query db for username, see if password matches, if it does...
       //query the database for user type and set the state to it.
     //if it doesn't match, tell the user that the credentials don't match and don't let them do anything
-    this.setState({
-      displayPage: 'patient',
-      professional: true,
-      username: username
-    })
+    if (username === 'Dr. Mario') {
+      this.setState({
+        displayPage: 'patient',
+        professional: true,
+        username: username
+      })
+    } else {
+      this.setState({
+        displayPage: 'patient',
+        professional: false,
+        username: username
+      })
+    }
+
   }
 
   render() {

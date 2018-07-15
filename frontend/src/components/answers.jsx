@@ -40,7 +40,7 @@ class Answers extends React.Component {
     }
 
     this.props.answers.forEach((answer) => {
-      fullAnswers.push(<Answer answer={answer} professional={this.props.professional} />)
+      fullAnswers.push(<Answer answer={answer} professional={this.props.professional} adjustAnswerVote={this.props.adjustAnswerVote}/>)
     })
 
     return fullAnswers

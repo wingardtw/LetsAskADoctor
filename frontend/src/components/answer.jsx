@@ -14,13 +14,16 @@ class Answer extends React.Component {
   handleUpvoteButtonClick() {
     if (this.state.upvoteButtonClicked) {
       this.props.answer.rating = this.props.answer.rating - 1
+      this.props.adjustAnswerVote(this.props.answer.id, -1)
     }
     else {
       this.props.answer.rating = this.props.answer.rating + 1
+      this.props.adjustAnswerVote(this.props.answer.id, 1)
     }
     this.setState({
       upvoteButtonClicked: !this.state.upvoteButtonClicked
     })
+
   }
 
   render() {
