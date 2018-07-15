@@ -1,4 +1,5 @@
 __*__
 .DS_STORE
-node_modules
-frontend/dist/bundle.js
+node_modules/*
+dist/*
+bundle.js
