@@ -1,8 +1,4 @@
-from rest_framework.permissions import IsAuthenticated
-from django.shortcuts import render
-from django.contrib.auth.models import User, Group, Permission
-from rest_framework import viewsets, permissions, status
-from rest_framework.response import Response
+from api.models import Question, Answer, Tag
 from api.serializers import (
     QuestionSerializer,
     QuestionListSerializer,
@@ -12,7 +8,14 @@ from api.serializers import (
     UserSerializer,
     GroupSerializer,
 )
-from api.models import Question, Answer, Tag
+from django.contrib.auth.models import User, Group, Permission
+from django.shortcuts import render
+from rest_framework import viewsets, permissions, status
+from rest_framework.decorators import api_view
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+
+
 
 class CanCreateAnswer(permissions.BasePermission):
     message = 'Must be a medical professional to answer'

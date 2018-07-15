@@ -36,7 +36,7 @@ class Tag(models.Model):
 class Answer(models.Model):
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     text = models.TextField()
-    question = models.ForeignKey('Question', on_delete=models.CASCADE)
+    question = models.ForeignKey('Question', related_name='answers', on_delete=models.CASCADE)
     thumbs_up = models.IntegerField(default=0)
     user = models.ForeignKey('auth.User', on_delete=models.SET(get_sentinel_user))
     pinned = models.BooleanField(default=False) 
