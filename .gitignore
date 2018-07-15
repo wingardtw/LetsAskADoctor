@@ -1,2 +1,5 @@
 __*__
 .DS_STORE
+node_modules/*
+dist/*
+bundle.js
