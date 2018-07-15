@@ -34,6 +34,12 @@ class App extends React.Component {
       }]
     }
     this.submitCredentials = this.submitCredentials.bind(this)
+    this.submitQuestion = this.submitQuestion.bind(this)
+  }
+
+  submitQuestion(text) {
+    //submit a question to the database, get username from this.state.username
+    console.log("We are going to submit this question: ", text)
   }
 
   submitCredentials(username, password) {
@@ -45,14 +51,13 @@ class App extends React.Component {
       userType: 'patient',
       username: username
     })
-    // app.setState(userType: 'patient')
   }
 
   render() {
     return (
       <div className = "allViewsContainer">
         <Login submitCredentials={this.submitCredentials} userType={this.state.userType}/>
-        <PatientView userType={this.state.userType} displayQuestions={this.state.questions} username={this.state.username}/>
+        <PatientView userType={this.state.userType} displayQuestions={this.state.questions} username={this.state.username} submitQuestion={this.submitQuestion}/>
         <ProfessionalView userType={this.state.userType}/>
       </div>
     )

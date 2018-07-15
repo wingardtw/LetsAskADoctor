@@ -8,16 +8,39 @@ class PatientView extends React.Component {
       displayQuestions: this.props.displayQuestions,
       searchInput: '',
       filterInput: '',
+      questionInput: '',
       userFilter: false
     }
     this.toggleUserFilter = this.toggleUserFilter.bind(this)
     this.handleTagSearchClick = this.handleTagSearchClick.bind(this)
     this.changeTagSearchInput = this.changeTagSearchInput.bind(this)
+    this.filterByKeyword = this.filterByKeyword.bind(this)
+    this.handleAskQuestionClick= this.handleAskQuestionClick.bind(this)
+    this.handleQuestionInputChange = this.handleQuestionInputChange.bind(this)
   }
 
   changeTagSearchInput(e) {
     this.setState({
       searchInput: e.target.value
+    })
+  }
+
+  filterByKeyword(e) {
+    this.setState({
+      displayQuestions: this.props.displayQuestions.filter(question => {
+        return question.text.includes(e.target.value)
+      })
+    })
+  }
+
+  handleAskQuestionClick(e) {
+    e.preventDefault()
+    this.props.submitQuestion(this.state.questionInput)
+  }
+
+  handleQuestionInputChange(e) {
+    this.setState({
+      questionInput: e.target.value
     })
   }
 
@@ -47,8 +70,6 @@ class PatientView extends React.Component {
     }
   }
 
-
-
   render() {
     if (this.props.userType !== 'patient') {
       return <div></div>
@@ -58,8 +79,8 @@ class PatientView extends React.Component {
           <h2 className = "questionBoxHeader" > Have a question? </h2>
           <div>
             <form>
-              <textarea rows="7" cols="70" />
-              <input type="submit" value="Ask"/>
+              <textarea rows="7" cols="70" onChange={this.handleQuestionInputChange}/>
+              <input type="submit" value="Ask" onClick={this.handleAskQuestionClick}/>
             </form>
           </div>
           <input type="checkbox" id="userFilter" onChange={this.toggleUserFilter} />
@@ -67,6 +88,9 @@ class PatientView extends React.Component {
             <form>
               Search a tag: <input type="text" id="tagSearch" onChange={this.changeTagSearchInput} />
               <input type="submit" onClick={this.handleTagSearchClick}/>
+            </form>
+            <form>
+              Filter by keyword: <input type="text" id="filter" onChange={this.filterByKeyword} />
             </form>
           <PatientQuestions questions={this.state.displayQuestions}/>
           
