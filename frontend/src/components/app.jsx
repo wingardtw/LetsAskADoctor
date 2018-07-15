@@ -89,18 +89,13 @@ class App extends React.Component {
     //we will then display all answers to that question if any(if there are none, let the user know)
     //we also need to set the activeQuestion to the question corresponding to questionid
 
-    console.log(questionId)
     const activeQuestion = this.state.questions.find((question) => {
       return question.id === questionId
     })
-
-    console.log("ACTIVE QUESTION", activeQuestion)
-
     this.setState({
       displayPage: 'answers',
       activeQuestion: activeQuestion
     })
-
   }
 
   submitAnswer(text) {

@@ -30,7 +30,7 @@ class Question extends React.Component {
         <span className="questionText">{this.props.question.text}</span>
           <QuestionUpvote upvoteButtonClicked={this.state.upvoteButtonClicked} handleUpvoteButtonClick={this.handleUpvoteButtonClick}/>
         <div className="askedBy">Asked by {this.props.question.user}</div>
-        <button onClick={function() {app.props.changeDisplayAnswers(app.props.question.id)}}>See Answers</button>
+        <button className="answerButton" onClick={function() {app.props.changeDisplayAnswers(app.props.question.id)}}>See Answers</button>
       </div>
     )
 

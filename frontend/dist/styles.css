@@ -7,3 +7,40 @@
   color: 'grey';
   font-size: 14px;
 }
+
+.questionsContainer {
+
+}
+
+.questionContainer {
+  padding-top: 40px;
+  display: grid;
+  justify-content: center;
+  grid-template-rows: [row1-start] 60px [row2-start] 30px [row2-end];
+  grid-template-columns: [col1-start] 70px [col2-start] 300px [col3-start] 100px [col4-start] 30px [col4-end];
+}
+
+.questionRating {
+  grid-row: 1/1;
+  grid-column: 1/2;
+}
+
+.questionText {
+  grid-row: 1/2;
+  grid-column: 2/3;
+}
+
+.questionUpvote {
+  grid-row: 1/2;
+  grid-column: 4/5;
+}
+
+.askedBy {
+  grid-row: 2/3;
+  grid-column: 2/3;
+}
+
+.answerButton {
+  grid-row: 2/3;
+  grid-column: 3/5;
+}

@@ -105,7 +105,9 @@ class QuestionsView extends React.Component {
             <form>
               Filter by keyword: <input type="text" id="filter" onChange={this.filterByKeyword} />
             </form>
-          <PatientQuestions questions={this.state.displayQuestions} changeDisplayAnswers={this.props.changeDisplayAnswers}/>          
+          <div className = "questionsContainer">
+            <PatientQuestions questions={this.state.displayQuestions} changeDisplayAnswers={this.props.changeDisplayAnswers}/> 
+          </div>         
         </div>)
     }    
   }
