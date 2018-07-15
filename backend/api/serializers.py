@@ -4,11 +4,15 @@ from rest_framework import serializers
 
 
 
-class QuestionSerializer(serializers.HyperlinkedModelSerializer):
+class QuestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Question
+        fields = ('url', 'text', 'uuid')
+
+class QuestionListSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Question
         fields = ('url', 'text', 'asker', 'uuid')
-
 
 class TagSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
