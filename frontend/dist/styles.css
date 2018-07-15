@@ -1,0 +1,9 @@
+.questionBy {
+  font-family: 'merriweather', serif;
+  font-size: 30px;
+}
+
+.askedBy {
+  font-color: 'grey';
+  font-size: 14px;
+}
