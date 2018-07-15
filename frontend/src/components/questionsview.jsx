@@ -4,8 +4,9 @@ import PatientQuestions from './patientquestions.jsx';
 class QuestionsView extends React.Component {
   constructor(props) {
     super(props)
+	  console.log('construct')
     this.state = {
-      displayQuestions: this.props.displayQuestions,
+      displayQuestions: props.displayQuestions,
       searchInput: '',
       filterInput: '',
       questionInput: '',
@@ -49,6 +50,9 @@ class QuestionsView extends React.Component {
     const app = this;
     this.setState({
       displayQuestions: this.props.displayQuestions.filter(question => {
+	if (!app.state.searchInput) {
+		return true
+	}
         return question.tags.includes(app.state.searchInput)
       })
     })
@@ -71,6 +75,8 @@ class QuestionsView extends React.Component {
   }
 
   render() {
+    console.log(this.state.displayQuestions)
+    console.log(this.props.displayQuestions)
     if (this.props.displayPage !== 'patient') {
       return <div></div>
     } else if (this.props.professional) {
@@ -83,7 +89,7 @@ class QuestionsView extends React.Component {
             <form>
               Filter by keyword: <input type="text" id="filter" onChange={this.filterByKeyword} />
             </form>
-          <PatientQuestions questions={this.state.displayQuestions} changeDisplayAnswers={this.props.changeDisplayAnswers}/>          
+          <PatientQuestions questions={this.props.displayQuestions} changeDisplayAnswers={this.props.changeDisplayAnswers}/>          
         </div>
       )
     } else {
@@ -105,7 +111,7 @@ class QuestionsView extends React.Component {
             <form>
               Filter by keyword: <input type="text" id="filter" onChange={this.filterByKeyword} />
             </form>
-          <PatientQuestions questions={this.state.displayQuestions} changeDisplayAnswers={this.props.changeDisplayAnswers}/>          
+          <PatientQuestions questions={this.props.displayQuestions} changeDisplayAnswers={this.props.changeDisplayAnswers}/>          
         </div>)
     }    
   }

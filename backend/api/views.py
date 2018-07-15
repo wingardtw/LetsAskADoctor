@@ -1,8 +1,4 @@
-from rest_framework.permissions import IsAuthenticated
-from django.shortcuts import render
-from django.contrib.auth.models import User, Group, Permission
-from rest_framework import viewsets, permissions, status
-from rest_framework.response import Response
+from api.models import Question, Answer, Tag
 from api.serializers import (
     QuestionSerializer,
     QuestionListSerializer,
@@ -12,7 +8,14 @@ from api.serializers import (
     UserSerializer,
     GroupSerializer,
 )
-from api.models import Question, Answer, Tag
+from django.contrib.auth.models import User, Group, Permission
+from django.shortcuts import render
+from rest_framework import viewsets, permissions, status
+from rest_framework.decorators import api_view
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.response import Response
+
+
 
 class CanCreateAnswer(permissions.BasePermission):
     message = 'Must be a medical professional to answer'
@@ -23,7 +26,7 @@ class CanCreateAnswer(permissions.BasePermission):
 
 # Create your views here.
 class QuestionViewSet(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (AllowAny,)
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
     
@@ -41,7 +44,7 @@ class QuestionViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
     def perform_create(self, serializer):
-        serializer.save(asker=self.request.user)
+        serializer.save(asker=User.objects.all()[0])
 
 
 class AnswerViewSet(viewsets.ModelViewSet):

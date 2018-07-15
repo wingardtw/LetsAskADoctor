@@ -64,9 +64,28 @@ class App extends React.Component {
     this.adjustAnswerVote = this.adjustAnswerVote.bind(this)
     this.submitAnswer = this.submitAnswer.bind(this)
   }
-
+	
   componentDidMount() {
     const app = this;
+    fetch("http://localhost:8000/questions/", {
+        method: "GET",
+	headers: {
+	    "Content-Type": "application/json",
+	}
+    }).then(function(response) {
+        return response.json();
+    }).then(function(data) {
+	data = data.map((question, i) => ({
+	    'text': question.text,
+            'id': i,
+	    'user': 'Auguste',
+	    'rating': 100,
+	    'tags': [],
+	}))
+	app.setState({'questions': data})
+    }).catch(function(ex) {
+        console.log("parsing failed", ex);
+    });
     this.setState({
       activeQuestion: app.state.questions[0]
     })
@@ -110,8 +129,20 @@ class App extends React.Component {
 
   submitQuestion(text) {
     //submit a question to the database, get username from this.state.username
-    console.log("We are going to submit this question: ", text)
-
+    console.log('test')
+    fetch("http://localhost:8000/questions/", {
+        method: "POST",
+	headers: {
+	    "Content-Type": "application/json",
+	},
+	body: JSON.stringify({'text': text})
+    }).then(function(response) {
+        return response.json();
+    }).then(function(data) {
+        console.log("Data is ok", data);
+    }).catch(function(ex) {
+        console.log("parsing failed", ex);
+    });
   }
 
   submitCredentials(username, password) {
